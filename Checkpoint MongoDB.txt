@@ -1,0 +1,62 @@
+1. Create a database called "contact"
+contact > use contact
+
+2.Create a new collection called "contactlist" 
+contact > db.createCollection("contactlist")
+
+3. Insert these documents  in "contactlist" :
+contact> db.contactlist.insertMany([
+   {
+      "last_name": "Ben Lahmer",
+      "first_name": "Fares",
+      "email": "fares@gmail.com",
+      "age": 26
+   },
+   {
+      "last_name": "Kefi",
+      "first_name": "Seif",
+      "email": "kefi@gmail.com",
+      "age": 15
+   },
+   {
+      "last_name": "Fatnassi",
+      "first_name": "Sarra",
+      "email": "sarra.f@gmail.com",
+      "age": 40
+   },
+   {
+      "last_name": "Ben Yahia",
+      "first_name": "Rym",
+      "age": 4
+   },
+   {
+      "last_name": "Cherif",
+      "first_name": "Sami",
+      "age": 3
+   }
+])
+
+==> Check if the insertion is correct : 
+contact > db.contactlist.find()
+
+4. Display all of the contacts list.
+contact > db.contactlist.find()
+
+
+5. Display all the information about only one person using his ID.
+contact > db.contactlist.findOne({_id: ObjectId("id_value_here")}) // you must know the id of the documents
+
+6. Display all the contacts with an age >18:
+contact > db.contactlist.find({age: {$gt: 18}})
+
+7.Display all the contacts with an age >18 and name containing "ah":
+contact > db.contactlist.find({$and: [{age: {$gt: 18}}, {first_name: /.*ah.*/i}]})
+
+8. Change the contact's first name from "Kefi Seif" to "Kefi Anis":
+contact > db.contactlist.updateOne({first_name: "Seif", last_name: "Kefi"}, {$set: {first_name: "Anis"}})
+
+9. Delete the contacts that are aged under <5:
+contact > db.contactlist.deleteMany({age: {$lt: 5}})
+
+10. Display all of the contacts list:
+contact > db.contactlist.find()
